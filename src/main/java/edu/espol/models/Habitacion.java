@@ -5,7 +5,11 @@
  */
 package edu.espol.models;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -34,6 +38,34 @@ public class Habitacion {
     public String getnHabitacion() {
         return nHabitacion;
     }
+
+    public int getPrecio() {
+        return precio;
+    }
+
+    public String getServicios() {
+        return servicios;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
     
-    
+        public static void cargarHabitaciones(){
+        try{
+            List<String> lineas= Files.readAllLines(Paths.get("archivos/Habitaciones.csv"));
+            lineas.remove(0);
+            for(String linea:lineas){
+                try{
+                    String[]separado=linea.split(";");
+                    Habitacion ha=new Habitacion(separado[0],Integer.parseInt(separado[2]), separado[3], separado[1]);
+                    Habitaciones.add(ha);
+                }catch(ArrayIndexOutOfBoundsException e){
+                    System.err.println("error en linea: "+linea);
+                }
+            }
+        } catch (IOException ex) {
+        System.out.println("No leyo el archivo: "+ ex);
+    }
+    }
 }

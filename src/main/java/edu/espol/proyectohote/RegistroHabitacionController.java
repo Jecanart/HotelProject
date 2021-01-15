@@ -7,9 +7,13 @@ package edu.espol.proyectohote;
 
 import edu.espol.models.Habitacion;
 import static edu.espol.models.Habitacion.Habitaciones;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -73,6 +77,7 @@ public class RegistroHabitacionController implements Initializable {
             int precio=Integer.parseInt(txtPrecioD.getText());
             Habitacion ha=new Habitacion(numero,precio, tfServicio.getText(), cbCategoria.getValue());
             Habitaciones.add(ha);
+            escrituraHabitaciones(ha);
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Informacion");
             alert.setHeaderText(null);
@@ -100,5 +105,12 @@ public class RegistroHabitacionController implements Initializable {
         }
         return resultado;
     }
-    
+     public static void escrituraHabitaciones(Habitacion h){                                                           
+        try(BufferedWriter escritor=new BufferedWriter(new FileWriter("archivos/Habitaciones.csv",true));){
+             escritor.write(h.getnHabitacion()+";"+h.getCategoria()+";"+String.valueOf(h.getPrecio())+";"+h.getServicios()+"\n");
+        }catch(IOException e){
+            System.err.println("Error de escritura: "+e);  
+        }
+    }
+
 }
