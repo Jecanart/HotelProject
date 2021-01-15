@@ -12,7 +12,22 @@
 
 <AnchorPane id="AnchorPane" prefHeight="430.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.espol.proyectohote.RegistroHabitacionController">
    <children>
-      <GridPane layoutX="39.0" layoutY="48.0" prefHeight="269.0" prefWidth="600.0">
+      <GridPane layoutX="40.0" layoutY="78.0" prefHeight="33.0" prefWidth="625.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="259.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.0" minWidth="10.0" prefWidth="235.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="205.0" minWidth="10.0" prefWidth="136.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <TextField fx:id="txtNumeroH" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="186.0" GridPane.columnIndex="1" />
+            <Label prefHeight="23.0" prefWidth="57.0" text="Numero:" />
+            <Button fx:id="btBuscar" mnemonicParsing="false" onAction="#buscarHabitacion" text="Buscar" GridPane.columnIndex="2" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="39.0" layoutY="116.0" prefHeight="201.0" prefWidth="600.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="256.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="344.0" minWidth="10.0" prefWidth="344.0" />
@@ -21,21 +36,19 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label prefHeight="23.0" prefWidth="57.0" text="Numero:" />
-            <Label prefHeight="17.0" prefWidth="89.0" text="Precio por dia:" GridPane.rowIndex="1" />
-            <Label prefHeight="17.0" prefWidth="70.0" text="Categoria:" GridPane.rowIndex="2" />
-            <Label prefHeight="17.0" prefWidth="63.0" text="Servicio:" GridPane.rowIndex="3" />
-            <TextField fx:id="txtNumeroH" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="171.0" GridPane.columnIndex="1" />
-            <TextField fx:id="txtPrecioD" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="173.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <ComboBox fx:id="cbCategoria" prefHeight="25.0" prefWidth="172.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextArea fx:id="tfServicio" maxWidth="-Infinity" prefHeight="0.0" prefWidth="307.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label prefHeight="17.0" prefWidth="89.0" text="Precio por dia:" />
+            <Label prefHeight="17.0" prefWidth="70.0" text="Categoria:" GridPane.rowIndex="1" />
+            <Label prefHeight="17.0" prefWidth="63.0" text="Servicio:" GridPane.rowIndex="2" />
+            <TextField fx:id="txtPrecioD" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="173.0" GridPane.columnIndex="1" />
+            <ComboBox fx:id="cbCategoria" prefHeight="25.0" prefWidth="172.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextArea fx:id="tfServicio" maxWidth="-Infinity" prefHeight="0.0" prefWidth="307.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <GridPane layoutX="35.0" layoutY="353.0" prefHeight="33.0" prefWidth="600.0">
          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
@@ -44,7 +57,8 @@
          </rowConstraints>
          <children>
             <Button fx:id="btGuardar" mnemonicParsing="false" onAction="#guardarHabitacion" text="Guardar" />
-            <Button fx:id="btCancelar" mnemonicParsing="false" text="Cancelar" GridPane.columnIndex="1" />
+            <Button fx:id="btCancelar" mnemonicParsing="false" text="Cancelar" GridPane.columnIndex="2" />
+            <Button fx:id="btEditar" mnemonicParsing="false" onAction="#editarHabitacion" text="Editar" GridPane.columnIndex="1" />
          </children>
       </GridPane>
       <Label layoutX="30.0" layoutY="24.0" prefHeight="17.0" prefWidth="152.0" text="Registro de habitaciones:" />
