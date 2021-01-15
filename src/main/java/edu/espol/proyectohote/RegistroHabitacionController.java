@@ -187,7 +187,7 @@ public class RegistroHabitacionController implements Initializable {
         btGuardar.setDisable(false);
     }
     
-    public void teclasnum(TextField t){
+    public static void teclasnum(TextField t){
         t.textProperty().addListener((observable, oldValue, newValue) -> {
         if (!newValue.matches("\\d*")) {
             t.setText(newValue.replaceAll("[^\\d]", ""));
