@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * JavaFX App
@@ -14,10 +15,12 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
+    public static String[] categorias ={"Matrimonial","Suite", "Doble", "Triple"};
 
+    
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        scene = new Scene(loadFXML("RegistroHabitacion"), 640, 480);
         stage.setScene(scene);
         stage.show();
     }
