@@ -195,7 +195,7 @@ public class RegistroHabitacionController implements Initializable {
     });
     }
     
-     public static boolean isNumeric(String cadena) {
+    public static boolean isNumeric(String cadena) {
         boolean resultado;
         try {
             Integer.parseInt(cadena);
@@ -206,13 +206,14 @@ public class RegistroHabitacionController implements Initializable {
         return resultado;
     }
      
-     public static void escrituraHabitaciones(Habitacion h){                                                   
+    public static void escrituraHabitaciones(Habitacion h){                                                   
         try(BufferedWriter escritor=new BufferedWriter(new FileWriter("archivos/Habitaciones.csv",true));){
              escritor.write(h.getnHabitacion()+";"+h.getCategoria()+";"+String.valueOf(h.getPrecio())+";"+h.getServicios()+"\n");
         }catch(IOException e){
             System.err.println("Error de escritura: "+e);  
         }
     }
+    
     public static void escrituraHabitaciones(ArrayList<Habitacion> list){
         try(BufferedWriter escritor=new BufferedWriter(new FileWriter("archivos/Habitaciones.csv",false));){
             escritor.write("Numero;Categoria;Precio;Servicios"+"\n");
@@ -224,5 +225,7 @@ public class RegistroHabitacionController implements Initializable {
         }
         
     }
+
+    
 
 }
