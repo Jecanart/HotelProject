@@ -63,11 +63,11 @@ public class SistemaHotelController implements Initializable {
         newWindow.show();
     }
     @FXML
-    public void startRecepcion(ActionEvent event) throws IOException{
-        Scene secondScene = new Scene(loadFXML("SistemaRecepcion"), 600, 400);
+    public void startReservacion(ActionEvent event) throws IOException{
+        Scene secondScene = new Scene(loadFXML("SistemaReservacion"), 820, 600);
         //Stage newWindow = new Stage();
         Stage newWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
-        newWindow.setTitle("Recepcion");
+        newWindow.setTitle("Reservación de Habitación");
         newWindow.setScene(secondScene);
         newWindow.show();
     }

@@ -19,12 +19,12 @@
                   <Font name="Corbel Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btRecepcion" layoutX="71.0" layoutY="238.0" mnemonicParsing="false" onAction="#startRecepcion" prefHeight="25.0" prefWidth="193.0" style="-fx-background-color: #C1A14E;" text="RECEPCIÓN" textFill="#f8f8f8">
+            <Button fx:id="btRecepcion" layoutX="71.0" layoutY="238.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="193.0" style="-fx-background-color: #C1A14E;" text="RECEPCIÓN" textFill="#f8f8f8">
                <font>
                   <Font name="Corbel Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btReserva" layoutX="71.0" layoutY="340.0" mnemonicParsing="false" onAction="#startRecepcion" prefHeight="25.0" prefWidth="193.0" style="-fx-background-color: #C1A14E;" text="RESERVAS" textFill="WHITE">
+            <Button fx:id="btReserva" layoutX="71.0" layoutY="340.0" mnemonicParsing="false" onAction="#startReservacion" prefHeight="25.0" prefWidth="193.0" style="-fx-background-color: #C1A14E;" text="RESERVAS" textFill="WHITE">
                <font>
                   <Font name="Corbel Bold" size="15.0" />
                </font>
