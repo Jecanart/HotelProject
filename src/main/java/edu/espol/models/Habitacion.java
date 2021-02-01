@@ -20,14 +20,23 @@ public class Habitacion {
     private int precio;
     private String servicios;
     private String categoria;
+    private String estado;
     
     public static ArrayList<Habitacion> Habitaciones=new ArrayList<>();
+    public Habitacion(String nHabitacion, int precio, String servicios, String categoria,String estado) {
+        this.nHabitacion = nHabitacion;
+        this.precio = precio;
+        this.servicios = servicios;
+        this.categoria = categoria;
+        this.estado=estado;
+    }
     
     public Habitacion(String nHabitacion, int precio, String servicios, String categoria) {
         this.nHabitacion = nHabitacion;
         this.precio = precio;
         this.servicios = servicios;
         this.categoria = categoria;
+        this.estado="Disponible";
     }
 
     @Override
@@ -50,6 +59,15 @@ public class Habitacion {
     public String getCategoria() {
         return categoria;
     }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    
     
         public static void cargarHabitaciones(){
         try{
