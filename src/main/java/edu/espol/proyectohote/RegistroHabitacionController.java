@@ -6,7 +6,7 @@
 package edu.espol.proyectohote;
 
 import edu.espol.models.Habitacion;
-import static edu.espol.models.Habitacion.Habitaciones;
+import static edu.espol.models.Habitacion.habitaciones;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -80,7 +80,7 @@ public class RegistroHabitacionController implements Initializable {
     String numero=txtNumeroH.getText();  
     boolean exist=false;
     int counter=-1;          
-    for(Habitacion h: Habitaciones){
+    for(Habitacion h: habitaciones){
      counter++;
      if(!numero.equals(h.getnHabitacion())){     
       }else{
@@ -93,7 +93,7 @@ public class RegistroHabitacionController implements Initializable {
             if(cbCategoria.getValue()!=null&&!txtPrecioD.getText().equals("")&&!tfServicio.getText().equals("")){
             int precio=Integer.parseInt(txtPrecioD.getText());
             Habitacion ha=new Habitacion(number,precio, tfServicio.getText(), cbCategoria.getValue());
-            Habitaciones.add(ha);
+            habitaciones.add(ha);
             escrituraHabitaciones(ha);
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Informacion");
@@ -121,9 +121,9 @@ public class RegistroHabitacionController implements Initializable {
                     if(cbCategoria.getValue()!=null&&!txtPrecioD.getText().equals("")&&!tfServicio.getText().equals("")){
                          int precio=Integer.parseInt(txtPrecioD.getText());
                          Habitacion ha=new Habitacion(numero,precio, tfServicio.getText(), cbCategoria.getValue());
-                         Habitaciones.add(ha);
-                         Habitaciones.remove(counter);
-                         escrituraHabitaciones(Habitaciones);
+                         habitaciones.add(ha);
+                         habitaciones.remove(counter);
+                         escrituraHabitaciones(habitaciones);
                          Alert alerta = new Alert(AlertType.INFORMATION);
                          alerta.setTitle("Informacion");
                          alerta.setHeaderText(null);
@@ -152,7 +152,7 @@ public class RegistroHabitacionController implements Initializable {
         tfServicio.clear();
         String numero=txtNumeroH.getText();
         boolean existe=false;
-        for(Habitacion h: Habitaciones){
+        for(Habitacion h: habitaciones){
             if(!numero.equals(h.getnHabitacion())){
                 
             }else{
@@ -214,7 +214,7 @@ public class RegistroHabitacionController implements Initializable {
      
     public static void escrituraHabitaciones(Habitacion h){                                                   
         try(BufferedWriter escritor=new BufferedWriter(new FileWriter("archivos/Habitaciones.csv",true));){
-             escritor.write(h.getnHabitacion()+";"+h.getCategoria()+";"+String.valueOf(h.getPrecio())+";"+h.getServicios()+"\n");
+             escritor.write(h.getnHabitacion()+";"+h.getCategoria()+";"+String.valueOf(h.getPrecio())+";"+h.getServicios()+";"+h.getEstado()+"\n");
         }catch(IOException e){
             System.err.println("Error de escritura: "+e);  
         }
@@ -222,9 +222,9 @@ public class RegistroHabitacionController implements Initializable {
     
     public static void escrituraHabitaciones(ArrayList<Habitacion> list){
         try(BufferedWriter escritor=new BufferedWriter(new FileWriter("archivos/Habitaciones.csv",false));){
-            escritor.write("Numero;Categoria;Precio;Servicios"+"\n");
-            for(Habitacion h: Habitaciones){
-             escritor.write(h.getnHabitacion()+";"+h.getCategoria()+";"+String.valueOf(h.getPrecio())+";"+h.getServicios()+"\n");
+            escritor.write("Numero;Categoria;Precio;Servicios;Estado"+"\n");
+            for(Habitacion h: habitaciones){
+             escritor.write(h.getnHabitacion()+";"+h.getCategoria()+";"+String.valueOf(h.getPrecio())+";"+h.getServicios()+";"+h.getEstado()+"\n");
              }
         }catch(IOException e){
             System.err.println("Error de escritura: "+e);  
@@ -250,20 +250,3 @@ public class RegistroHabitacionController implements Initializable {
     
 
 }
-
-/*
-@FXML
-    public void startMenu(ActionEvent event) throws IOException {
-        Scene secondScene = new Scene(loadFXML("SistemaHotel"), 670, 430);
-        //Stage newWindow = new Stage();
-        Stage newWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
-        newWindow.setTitle("Sistema Hotel");
-        newWindow.setScene(secondScene);
-        newWindow.show();
-    }
-    
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
-    }
-*/

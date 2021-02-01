@@ -8,7 +8,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -22,20 +21,22 @@
          </font></Label>
       <ScrollPane layoutX="29.0" layoutY="73.0" prefHeight="285.0" prefWidth="552.0">
          <content>
-            <FlowPane prefHeight="286.0" prefWidth="552.0">
-               <children>
-                  <HBox fx:id="hpane1" prefHeight="273.0" prefWidth="550.0" style="-fx-background-color: #ffffff;" />
-               </children>
-            </FlowPane>
+            <HBox fx:id="hpane1" prefHeight="285.0" prefWidth="550.0" style="-fx-background-color: #ffffff;" />
          </content>
       </ScrollPane>
-      <Button fx:id="btMenu" layoutX="603.0" layoutY="518.0" mnemonicParsing="false" onAction="#startMenu" prefHeight="25.0" prefWidth="174.0" style="-fx-background-color: #C1A14E;" text="CANCELAR RESERVACIÓN" />
+      <Button fx:id="btMenu" layoutX="378.0" layoutY="496.0" mnemonicParsing="false" onAction="#startMenu" prefHeight="27.0" prefWidth="174.0" style="-fx-background-color: #C1A14E;" text="CANCELAR RESERVACIÓN" textFill="WHITE">
+         <font>
+            <Font name="Corbel Bold" size="13.0" />
+         </font></Button>
       <DatePicker fx:id="fechaEntrada" layoutX="603.0" layoutY="99.0" promptText="Fecha de Entrada" />
       <DatePicker fx:id="fechaSalida" layoutX="603.0" layoutY="172.0" promptText="Fecha de Salida" />
       <Label layoutX="603.0" layoutY="73.0" prefHeight="17.0" prefWidth="204.0" text="Fecha de Entrada" textFill="#c1a14e" />
       <Label layoutX="603.0" layoutY="148.0" prefHeight="17.0" prefWidth="204.0" text="Fecha de Salida" textFill="#c1a14e" />
-      <Button fx:id="verificar" layoutX="603.0" layoutY="305.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" style="-fx-background-color: #C1A14E;" text="VERIFICAR" />
-      <ComboBox fx:id="cboxCategoria" layoutX="603.0" layoutY="238.0" prefHeight="25.0" prefWidth="174.0" promptText="CATEGORÍA" style="-fx-background-color: #C1A14E;" />
+      <Button fx:id="verificar" layoutX="603.0" layoutY="305.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" style="-fx-background-color: #C1A14E;" text="VERIFICAR" textFill="WHITE">
+         <font>
+            <Font name="Corbel Bold" size="13.0" />
+         </font></Button>
+      <ComboBox fx:id="cboxCategoria" layoutX="603.0" layoutY="238.0" onAction="#cambiar" prefHeight="25.0" prefWidth="174.0" promptText="CATEGORÍA" style="-fx-background-color: #C1A14E;" />
       <GridPane layoutX="29.0" layoutY="356.0" prefHeight="187.0" prefWidth="334.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="120.0" />
@@ -74,5 +75,15 @@
             <TextField fx:id="paisOrigen" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="161.0" promptText="País de Origen" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
+      <ScrollPane layoutX="362.0" layoutY="371.0" prefHeight="93.0" prefWidth="409.0" style="-fx-background-color: #C1A14E;" vbarPolicy="NEVER">
+         <content>
+            <HBox fx:id="hpane2" prefHeight="93.0" prefWidth="407.0" style="-fx-background-color: #C1A14E;" />
+         </content>
+      </ScrollPane>
+      <Button fx:id="btGuardarReserva" layoutX="581.0" layoutY="496.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="174.0" style="-fx-background-color: #C1A14E;" text="GUARDAR RESERVA" textFill="WHITE">
+         <font>
+            <Font name="Corbel Bold" size="13.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

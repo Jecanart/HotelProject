@@ -22,7 +22,7 @@ public class Habitacion {
     private String categoria;
     private String estado;
     
-    public static ArrayList<Habitacion> Habitaciones=new ArrayList<>();
+    public static ArrayList<Habitacion> habitaciones=new ArrayList<>();
     public Habitacion(String nHabitacion, int precio, String servicios, String categoria,String estado) {
         this.nHabitacion = nHabitacion;
         this.precio = precio;
@@ -77,7 +77,7 @@ public class Habitacion {
                 try{
                     String[]separado=linea.split(";");
                     Habitacion ha=new Habitacion(separado[0],Integer.parseInt(separado[2]), separado[3], separado[1],separado[4]);
-                    Habitaciones.add(ha);
+                    habitaciones.add(ha);
                 }catch(ArrayIndexOutOfBoundsException e){
                     System.err.println("error en linea: "+linea);
                 }
@@ -86,4 +86,19 @@ public class Habitacion {
         System.out.println("No leyo el archivo: "+ ex);
     }
     }
+        
+    public static ArrayList <Habitacion> filtrarHabitacion(ArrayList<Habitacion> habitacionesF,String categoria)
+     {
+        ArrayList <Habitacion> habitacionesFiltradas = new ArrayList<>();
+        for(Habitacion h: habitacionesF){
+            if (h.getCategoria().equals(categoria))
+                habitacionesFiltradas.add(h);
+            else if(categoria.equals("Todas"))
+                habitacionesFiltradas.add(h);
+        }
+        return habitacionesFiltradas;
+     }
+
+  
+     
 }
