@@ -15,9 +15,9 @@
 
 <AnchorPane id="AnchorPane" prefHeight="430.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.espol.proyectohote.RegistroHabitacionController">
    <children>
-      <ImageView fitHeight="430.0" fitWidth="646.0" layoutX="24.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="430.0" fitWidth="668.0" layoutX="32.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../imagenes/crearHabitacion.jpg" />
+            <Image url="@../../../imagenes/crearHabitacion2.jpg" />
          </image></ImageView>
       <AnchorPane prefHeight="430.0" prefWidth="380.0" style="-fx-background-color: #06151C;">
          <children>
