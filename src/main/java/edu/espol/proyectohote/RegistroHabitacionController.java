@@ -208,7 +208,7 @@ public class RegistroHabitacionController implements Initializable {
      
     public static void escrituraHabitaciones(Habitacion h){                                                   
         try(BufferedWriter escritor=new BufferedWriter(new FileWriter("archivos/Habitaciones.csv",true));){
-             escritor.write(h.getnHabitacion()+";"+h.getCategoria()+";"+String.valueOf(h.getPrecio())+";"+h.getServicios()+"\n");
+             escritor.write(h.getnHabitacion()+";"+h.getCategoria()+";"+String.valueOf(h.getPrecio())+";"+h.getServicios()+";"+h.getEstado()+"\n");
         }catch(IOException e){
             System.err.println("Error de escritura: "+e);  
         }

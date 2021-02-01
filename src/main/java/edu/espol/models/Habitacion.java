@@ -76,7 +76,7 @@ public class Habitacion {
             for(String linea:lineas){
                 try{
                     String[]separado=linea.split(";");
-                    Habitacion ha=new Habitacion(separado[0],Integer.parseInt(separado[2]), separado[3], separado[1]);
+                    Habitacion ha=new Habitacion(separado[0],Integer.parseInt(separado[2]), separado[3], separado[1],separado[4]);
                     Habitaciones.add(ha);
                 }catch(ArrayIndexOutOfBoundsException e){
                     System.err.println("error en linea: "+linea);
