@@ -15,8 +15,13 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -25,6 +30,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -208,7 +214,7 @@ public class RegistroHabitacionController implements Initializable {
      
     public static void escrituraHabitaciones(Habitacion h){                                                   
         try(BufferedWriter escritor=new BufferedWriter(new FileWriter("archivos/Habitaciones.csv",true));){
-             escritor.write(h.getnHabitacion()+";"+h.getCategoria()+";"+String.valueOf(h.getPrecio())+";"+h.getServicios()+";"+h.getEstado()+"\n");
+             escritor.write(h.getnHabitacion()+";"+h.getCategoria()+";"+String.valueOf(h.getPrecio())+";"+h.getServicios()+"\n");
         }catch(IOException e){
             System.err.println("Error de escritura: "+e);  
         }
@@ -225,7 +231,39 @@ public class RegistroHabitacionController implements Initializable {
         }
         
     }
+    
+    @FXML
+    public void startMenu(ActionEvent event) throws IOException {
+        Scene secondScene = new Scene(loadFXML("SistemaHotel"), 670, 430);
+        //Stage newWindow = new Stage();
+        Stage newWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
+        newWindow.setTitle("Sistema Hotel");
+        newWindow.setScene(secondScene);
+        newWindow.show();
+    }
+    
+    private static Parent loadFXML(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        return fxmlLoader.load();
+    }
 
     
 
 }
+
+/*
+@FXML
+    public void startMenu(ActionEvent event) throws IOException {
+        Scene secondScene = new Scene(loadFXML("SistemaHotel"), 670, 430);
+        //Stage newWindow = new Stage();
+        Stage newWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
+        newWindow.setTitle("Sistema Hotel");
+        newWindow.setScene(secondScene);
+        newWindow.show();
+    }
+    
+    private static Parent loadFXML(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        return fxmlLoader.load();
+    }
+*/

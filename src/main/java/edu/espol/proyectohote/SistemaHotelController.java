@@ -8,9 +8,11 @@ package edu.espol.proyectohote;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -25,14 +27,15 @@ public class SistemaHotelController implements Initializable {
 
     @FXML
     private Button btRegistroH;
-   
     @FXML
     private Button btRegistroHo;
     @FXML
     private Button btRecepcion;
     @FXML
     private Button btReserva;
-
+    
+    
+    
     /**
      * Initializes the controller class.
      */
@@ -42,25 +45,28 @@ public class SistemaHotelController implements Initializable {
     }    
    
     @FXML
-    public void startRegistro() throws IOException{
-        Scene secondScene = new Scene(loadFXML("RegistroHabitacion"), 640, 480);
-        Stage newWindow = new Stage();
+    public void startRegistro(ActionEvent event) throws IOException{
+        Scene secondScene = new Scene(loadFXML("RegistroHabitacion"), 677, 430);
+        //Stage newWindow = new Stage();
+        Stage newWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
         newWindow.setTitle("Registro de habitaciones");
         newWindow.setScene(secondScene);
         newWindow.show();
     }
     @FXML
-    public void startHotel() throws IOException{
-        Scene secondScene = new Scene(loadFXML("RegistroHotel"), 640, 480);
-        Stage newWindow = new Stage();
+    public void startHotel(ActionEvent event) throws IOException{
+        Scene secondScene = new Scene(loadFXML("RegistroHotel"), 670, 430);
+        //Stage newWindow = new Stage();
+        Stage newWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
         newWindow.setTitle("Registro de Hoteles");
         newWindow.setScene(secondScene);
         newWindow.show();
     }
     @FXML
-    public void startRecepcion() throws IOException{
-        Scene secondScene = new Scene(loadFXML("SistemaRecepcion"), 640, 480);
-        Stage newWindow = new Stage();
+    public void startRecepcion(ActionEvent event) throws IOException{
+        Scene secondScene = new Scene(loadFXML("SistemaRecepcion"), 600, 400);
+        //Stage newWindow = new Stage();
+        Stage newWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
         newWindow.setTitle("Recepcion");
         newWindow.setScene(secondScene);
         newWindow.show();
@@ -70,6 +76,5 @@ public class SistemaHotelController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
-    
-    
 }
+//Stage newWindow3 = (Stage)((Node)e3.getSource()).getScene().getWindow();

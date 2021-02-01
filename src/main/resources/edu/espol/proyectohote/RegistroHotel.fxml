@@ -11,22 +11,22 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="379.0" prefWidth="561.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.espol.proyectohote.RegistroHotelController">
+<AnchorPane id="AnchorPane" prefHeight="430.0" prefWidth="724.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.espol.proyectohote.RegistroHotelController">
    <children>
-      <ImageView fitHeight="403.0" fitWidth="604.0" layoutX="84.0" layoutY="-3.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="430.0" fitWidth="670.0" layoutX="84.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../imagenes/interiorHotel2.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="btGuardar" layoutX="433.0" layoutY="152.0" mnemonicParsing="false" onAction="#guardarHotel" prefHeight="28.0" prefWidth="159.0" style="-fx-background-color: #06151C;" text="Guardar" textFill="WHITE">
+      <Button fx:id="btGuardar" layoutX="449.0" layoutY="153.0" mnemonicParsing="false" onAction="#guardarHotel" prefHeight="28.0" prefWidth="159.0" style="-fx-background-color: #06151C;" text="Guardar" textFill="WHITE">
          <font>
             <Font name="Corbel Bold" size="15.0" />
          </font></Button>
-      <Button fx:id="btCancelar" layoutX="433.0" layoutY="215.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="159.0" style="-fx-background-color: #06151C;" text="Cancelar" textFill="WHITE">
+      <Button fx:id="btCancelar" layoutX="449.0" layoutY="215.0" mnemonicParsing="false" onAction="#startMenu" prefHeight="28.0" prefWidth="159.0" style="-fx-background-color: #06151C;" text="Cancelar" textFill="WHITE">
          <font>
             <Font name="Corbel Bold" size="15.0" />
          </font></Button>
-      <AnchorPane layoutY="-6.0" prefHeight="406.0" prefWidth="341.0" style="-fx-background-color: #06151C;">
+      <AnchorPane prefHeight="430.0" prefWidth="355.0" style="-fx-background-color: #06151C;">
          <children>
             <GridPane layoutX="30.0" layoutY="103.0" prefHeight="189.0" prefWidth="275.0">
               <columnConstraints>
@@ -40,10 +40,6 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Nombre:" textFill="WHITE">
-                     <font>
-                        <Font name="Corbel Bold" size="15.0" />
-                     </font></Label>
                   <Label text="Ciudad:" textFill="WHITE" GridPane.rowIndex="1">
                      <font>
                         <Font name="Corbel Bold" size="15.0" />
@@ -70,6 +66,11 @@
             <Label layoutX="52.0" layoutY="44.0" prefHeight="17.0" prefWidth="238.0" text="REGISTRAR HOTEL" textFill="#c1a14e">
                <font>
                   <Font name="Times New Roman" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="277.0" layoutY="91.0" text="Nombre:" textFill="WHITE">
+               <font>
+                  <Font name="Corbel Bold" size="15.0" />
                </font>
             </Label>
          </children>

@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="edu.espol.proyectohote.SistemaRecepcionController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.espol.proyectohote.SistemaRecepcionController">
    <children>
       <Label layoutX="39.0" layoutY="15.0" prefHeight="17.0" prefWidth="105.0" text="Habitaciones:" />
       <ScrollPane layoutX="29.0" layoutY="54.0" prefHeight="312.0" prefWidth="538.0">
@@ -15,6 +14,6 @@
             <FlowPane prefHeight="200.0" prefWidth="200.0" />
          </content>
       </ScrollPane>
-      <Button layoutX="520.0" layoutY="11.0" mnemonicParsing="false" text="Menu" />
+      <Button fx:id="btMenu" layoutX="520.0" layoutY="11.0" mnemonicParsing="false" onAction="#startMenu" text="Menu" />
    </children>
 </AnchorPane>
