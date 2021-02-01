@@ -3,15 +3,41 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="377.0" prefWidth="613.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.espol.proyectohote.SistemaHotelController">
    <children>
-      <Button fx:id="btRegistroH" layoutX="90.0" layoutY="123.0" mnemonicParsing="false" onAction="#startRegistro" text="Registro Habitacion" />
-      <Label layoutX="90.0" layoutY="22.0" text="Sistema Hotelero" />
-      <Label layoutX="90.0" layoutY="39.0" text="Menu Principal" />
-      <Button fx:id="btRegistroHo" layoutX="90.0" layoutY="86.0" mnemonicParsing="false" onAction="#startHotel" text="Registro Hotel" />
-      <Button fx:id="btRecepcion" layoutX="90.0" layoutY="164.0" mnemonicParsing="false" onAction="#startRecepcion" text="Recepcion" />
-      <Button fx:id="btReserva" layoutX="90.0" layoutY="204.0" mnemonicParsing="false" text="Reservas" />
+      <AnchorPane layoutX="301.0" prefHeight="377.0" prefWidth="320.0" style="-fx-background-color: #06151C;">
+         <children>
+            <Button fx:id="btRegistroH" layoutX="71.0" layoutY="125.0" mnemonicParsing="false" onAction="#startRegistro" prefHeight="25.0" prefWidth="193.0" style="-fx-background-color: #C1A14E;" text="REGISTRO HABITACIÓN" textFill="WHITE">
+               <font>
+                  <Font name="Corbel Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btRegistroHo" layoutX="71.0" layoutY="38.0" mnemonicParsing="false" onAction="#startHotel" prefHeight="25.0" prefWidth="193.0" style="-fx-background-color: #C1A14E;" text="REGISTRO HOTEL" textFill="WHITE">
+               <font>
+                  <Font name="Corbel Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btRecepcion" layoutX="71.0" layoutY="209.0" mnemonicParsing="false" onAction="#startRecepcion" prefHeight="25.0" prefWidth="193.0" style="-fx-background-color: #C1A14E;" text="RECEPCIÓN" textFill="#f8f8f8">
+               <font>
+                  <Font name="Corbel Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btReserva" layoutX="71.0" layoutY="299.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="193.0" style="-fx-background-color: #C1A14E;" text="RESERVAS" textFill="WHITE">
+               <font>
+                  <Font name="Corbel Bold" size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <Label layoutX="25.0" layoutY="151.0" prefHeight="38.0" prefWidth="253.0" text="SISTEMA HOTELERO" textAlignment="JUSTIFY" textFill="#06151c">
+         <font>
+            <Font name="Times New Roman" size="25.0" />
+         </font></Label>
+      <Label layoutX="93.0" layoutY="179.0" prefHeight="21.0" prefWidth="124.0" text="MENÚ PRINCIPAL" textAlignment="CENTER" textFill="#bb9b4c">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font></Label>
    </children>
 </AnchorPane>
