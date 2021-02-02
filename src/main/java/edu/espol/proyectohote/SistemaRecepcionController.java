@@ -5,8 +5,13 @@
  */
 package edu.espol.proyectohote;
 
+import edu.espol.models.Habitacion;
+import static edu.espol.models.Habitacion.habitaciones;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,11 +50,12 @@ public class SistemaRecepcionController implements Initializable {
     
     public void llenarHabitaciones(){    
         pHabitaciones.getChildren().clear();
-        for(int i=0;i<=10;i++){
+        Collections.sort(habitaciones, (Habitacion h1, Habitacion h2) -> new Integer(h2.getintnHabitacion()).compareTo(new Integer(h1.getintnHabitacion())));
+        for(Habitacion h: habitaciones){
             VBox room=new VBox();
-            Label lblNumero= new Label("Numero"+i);
-            Label lblCategoria= new Label("Categoria");
-            Label lblEstado= new Label("Precio");
+            Label lblNumero= new Label(h.getnHabitacion());
+            Label lblCategoria= new Label(h.getCategoria());
+            Label lblEstado= new Label(h.getEstado());
             room.getChildren().addAll(lblNumero,lblCategoria,lblEstado);
             room.setStyle("-fx-border-color: black");
             pHabitaciones.getChildren().addAll(room);
@@ -57,6 +63,7 @@ public class SistemaRecepcionController implements Initializable {
                 System.out.println("funciona");
             });
         }  
+    
     }
     @FXML
         public void startMenu(ActionEvent event) throws IOException {
@@ -71,7 +78,7 @@ public class SistemaRecepcionController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
-            
+      
     }
     
 
