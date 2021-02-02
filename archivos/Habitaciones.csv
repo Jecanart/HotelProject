@@ -1,6 +1,7 @@
 Numero;Categoria;Precio;Servicios;Estado
 23123;Suite;23;todo incluido;Disponible
+1111;Doble;62;Cama doble;Ocupada
+231;Suite;21;todo incluido;Disponible
+110;Doble;60;Cama doble;Ocupada
 100;Doble;100;Cama doble;Disponible
-110;Doble;60;Cama doble;Reservada
-231;Suite;21;todo incluido;Ocupada
-
+69;Triple;70;Cama Triple;Disponible

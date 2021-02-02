@@ -7,11 +7,13 @@ package edu.espol.proyectohote;
 
 import edu.espol.models.Habitacion;
 import static edu.espol.models.Habitacion.habitaciones;
+import static edu.espol.proyectohote.RegistroHabitacionController.escrituraHabitaciones;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,7 +22,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -65,11 +70,7 @@ public class SistemaRecepcionController implements Initializable {
             pHabitaciones.getChildren().addAll(room);
             switch(h.getEstado()){
                 case "Disponible":
-                    Image img = new Image("imagenes/"+h.getCategoria()+".JPG");
-                    ImageView imgView = new ImageView(img);
-                    imgView.setFitHeight(105);
-                    imgView.setFitWidth(135);
-                    room.getChildren().add(imgView);
+                    colocarImagen(room,h.getCategoria());
                     room.setStyle("-fx-background-color: green;"+"-fx-border-color: black");
                     room.setOnMouseClicked((MouseEvent mouseEvent) -> {
                 try {
@@ -84,20 +85,44 @@ public class SistemaRecepcionController implements Initializable {
             });
                     break;
                 case "Reservada":
-                    Image img2 = new Image("imagenes/"+h.getCategoria()+".JPG");
-                    ImageView imgView2 = new ImageView(img2);
-                    imgView2.setFitHeight(105);
-                    imgView2.setFitWidth(135);
-                    room.getChildren().add(imgView2);
+                    colocarImagen(room,h.getCategoria());
                     room.setStyle("-fx-background-color: orange;"+"-fx-border-color: black");
+                    room.setOnMouseClicked((MouseEvent mouseEvent) -> {
+                         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                         alerta.setTitle("Check-in");
+                         alerta.setHeaderText(null);
+                         alerta.setContentText("Desea realizar el Check-in de la habitacion: "+h.getnHabitacion());
+                         ButtonType si = new ButtonType("Si");
+                         ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+                         alerta.getButtonTypes().setAll(si,no);
+                         Optional<ButtonType> result = alerta.showAndWait();
+                         if(result.get()==si){
+                             h.setEstado("Ocupada");
+                             llenarHabitaciones();
+                             escrituraHabitaciones(habitaciones);
+                         }
+            });
+                    
                     break;
                 case "Ocupada":
-                    Image img3 = new Image("imagenes/"+h.getCategoria()+".JPG");
-                    ImageView imgView3 = new ImageView(img3);
-                    imgView3.setFitHeight(105);
-                    imgView3.setFitWidth(135);
-                    room.getChildren().add(imgView3);
+                    colocarImagen(room,h.getCategoria());
+                    room.setOnMouseClicked((MouseEvent mouseEvent) -> {
+                         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                         alerta.setTitle("Check-in");
+                         alerta.setHeaderText(null);
+                         alerta.setContentText("Desea realizar el Check-out de la habitacion: "+h.getnHabitacion());
+                         ButtonType si = new ButtonType("Si");
+                         ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+                         alerta.getButtonTypes().setAll(si,no);
+                         Optional<ButtonType> result = alerta.showAndWait();
+                         if(result.get()==si){
+                             h.setEstado("Disponible");
+                             llenarHabitaciones();
+                             escrituraHabitaciones(habitaciones);
+                         }
+            });
                     room.setStyle("-fx-background-color: darkred;"+"-fx-border-color: black");
+                    
                     break;
                 default:
                     System.out.println("Error de lectura");
@@ -105,7 +130,20 @@ public class SistemaRecepcionController implements Initializable {
         
             
         }  
+   
+    }
     
+    public void actualizarHabitaciones(){
+        
+    }
+    
+    //Coloca la imagen en el Vbox
+    public void colocarImagen(VBox vbox,String s){
+        Image img = new Image("imagenes/"+s+".JPG");
+                    ImageView imgView = new ImageView(img);
+                    imgView.setFitHeight(105);
+                    imgView.setFitWidth(135);
+                    vbox.getChildren().add(imgView);
     }
     @FXML
         public void startMenu(ActionEvent event) throws IOException {
