@@ -74,8 +74,7 @@ public class SistemaHotelController implements Initializable {
     @FXML
     public void startReservacion(ActionEvent event) throws IOException{
         Scene secondScene = new Scene(loadFXML("SistemaReservacion"), 820, 600);
-        //Stage newWindow = new Stage();
-        Stage newWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage newWindow = new Stage();
         newWindow.setTitle("Reservación de Habitación");
         newWindow.setScene(secondScene);
         newWindow.show();

@@ -66,6 +66,8 @@ public class SistemaReservacionController implements Initializable {
     private TextField identificacion;
     @FXML
     private TextField paisOrigen;
+    @FXML
+    private Button btGuardarReserva;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -81,15 +83,6 @@ public class SistemaReservacionController implements Initializable {
 
     }
 
-    @FXML
-    public void startMenu(ActionEvent event) throws IOException {
-        Scene secondScene = new Scene(loadFXML("SistemaHotel"), 670, 430);
-        //Stage newWindow = new Stage();
-        Stage newWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
-        newWindow.setTitle("Sistema Hotel");
-        newWindow.setScene(secondScene);
-        newWindow.show();
-    }
     
     @FXML
     private void cambiar(ActionEvent event){
@@ -156,10 +149,12 @@ public class SistemaReservacionController implements Initializable {
                 );
         }  
     }
-    
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
-    }
+    @FXML
+    public void cerrarVentana(ActionEvent event) {
+    Node source = (Node) event.getSource();
+    Stage stage = (Stage) source.getScene().getWindow();
+    stage.close();
+}
+ 
     
 }

@@ -22,6 +22,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
@@ -54,14 +56,54 @@ public class SistemaRecepcionController implements Initializable {
         for(Habitacion h: habitaciones){
             VBox room=new VBox();
             Label lblNumero= new Label(h.getnHabitacion());
+            lblNumero.setStyle("-fx-text-fill: white");
             Label lblCategoria= new Label(h.getCategoria());
+            lblCategoria.setStyle("-fx-text-fill: white");
             Label lblEstado= new Label(h.getEstado());
+            lblEstado.setStyle("-fx-text-fill: white");
             room.getChildren().addAll(lblNumero,lblCategoria,lblEstado);
-            room.setStyle("-fx-border-color: black");
             pHabitaciones.getChildren().addAll(room);
-            room.setOnMouseClicked((MouseEvent mouseEvent) -> {
-                System.out.println("funciona");
+            switch(h.getEstado()){
+                case "Disponible":
+                    Image img = new Image("imagenes/"+h.getCategoria()+".JPG");
+                    ImageView imgView = new ImageView(img);
+                    imgView.setFitHeight(105);
+                    imgView.setFitWidth(135);
+                    room.getChildren().add(imgView);
+                    room.setStyle("-fx-background-color: green;"+"-fx-border-color: black");
+                    room.setOnMouseClicked((MouseEvent mouseEvent) -> {
+                try {
+                    Scene secondScene = new Scene(loadFXML("SistemaReservacion"), 820, 600);
+                    Stage newWindow = new Stage();
+                    newWindow.setTitle("Reservación de Habitación");
+                    newWindow.setScene(secondScene);
+                    newWindow.show();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             });
+                    break;
+                case "Reservada":
+                    Image img2 = new Image("imagenes/"+h.getCategoria()+".JPG");
+                    ImageView imgView2 = new ImageView(img2);
+                    imgView2.setFitHeight(105);
+                    imgView2.setFitWidth(135);
+                    room.getChildren().add(imgView2);
+                    room.setStyle("-fx-background-color: orange;"+"-fx-border-color: black");
+                    break;
+                case "Ocupada":
+                    Image img3 = new Image("imagenes/"+h.getCategoria()+".JPG");
+                    ImageView imgView3 = new ImageView(img3);
+                    imgView3.setFitHeight(105);
+                    imgView3.setFitWidth(135);
+                    room.getChildren().add(imgView3);
+                    room.setStyle("-fx-background-color: darkred;"+"-fx-border-color: black");
+                    break;
+                default:
+                    System.out.println("Error de lectura");
+            }
+        
+            
         }  
     
     }
