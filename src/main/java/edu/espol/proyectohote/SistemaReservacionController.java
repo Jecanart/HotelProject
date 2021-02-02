@@ -123,6 +123,80 @@ public class SistemaReservacionController implements Initializable {
         
     }
     
+    @FXML
+    public void verificarFechaEntrada(ActionEvent event){
+        LocalDate fechaActual = LocalDate.now();
+        LocalDate inicio = fechaEntrada.getValue();
+        if(inicio.isAfter(fechaActual) || inicio.isEqual(fechaActual)){
+            Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+            alerta.setTitle("Información");
+            alerta.setHeaderText(null);
+            alerta.setContentText("¡La fecha ingresada correctamente!");
+            alerta.showAndWait();  
+        }
+        else{
+            Alert alerta1 = new Alert(Alert.AlertType.ERROR);
+            alerta1.setTitle("Error de registro de Fecha");
+            alerta1.setHeaderText(null);
+            alerta1.setContentText("La fecha seleccionada debe ser apartir del: "+fechaActual);
+            alerta1.showAndWait();
+        }
+    }
+    
+    @FXML
+    public void verificarFechaSalida(ActionEvent event){
+        LocalDate inicio = fechaEntrada.getValue();
+        LocalDate salida = fechaSalida.getValue();
+        if(salida.isAfter(inicio)){
+            Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+            alerta.setTitle("Información");
+            alerta.setHeaderText(null);
+            alerta.setContentText("¡La fecha ingresada correctamente!");
+            alerta.showAndWait();  
+        }
+        else{
+            Alert alerta1 = new Alert(Alert.AlertType.ERROR);
+            alerta1.setTitle("Error de registro de Fecha");
+            alerta1.setHeaderText(null);
+            alerta1.setContentText("La fecha seleccionada debe ser después del: "+inicio);
+            alerta1.showAndWait();
+        }
+    }
+    
+    @FXML
+    public void verificar(ActionEvent event){
+        System.out.println(lblNhab.getText());
+        LocalDate inicio = fechaEntrada.getValue();
+        LocalDate salida = fechaSalida.getValue();
+        for(Reservas r : reservas){
+            r.getNhabitacion();
+            if(lblNhab.getText().equals(r.getNhabitacion())){
+                System.out.println("Entre al IF");
+                LocalDate inicioReserva = r.getIngreso();
+                LocalDate salidaReserva = r.getSalida();
+                if(inicio.isBefore(inicioReserva) && salida.isBefore(inicioReserva)){ //Fecha No Incluida(inicio.isAfter(salidaReserva) && salida.isAfter(salidaReserva))
+                    Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                    alerta.setTitle("Información");
+                    alerta.setHeaderText(null);
+                    alerta.setContentText("No hay reservaciones durante las fechas seleccionadas!");
+                    alerta.showAndWait();  
+                }
+                else{
+                    Alert alerta1 = new Alert(Alert.AlertType.ERROR);
+                    alerta1.setTitle("Error de registro de Fecha");
+                    alerta1.setHeaderText(null);
+                    alerta1.setContentText("La fecha seleccionada debe ser después del: "+inicio);
+                    alerta1.showAndWait();
+                }
+            }
+            
+            
+        }
+        System.out.println("Salir del For");
+    }
+    
+
+    
     public void mostrarHabitacion(ArrayList<Habitacion> listaHabitaciones){
         for(Habitacion h : listaHabitaciones){
             System.out.println(h.getCategoria());
