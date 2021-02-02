@@ -7,7 +7,10 @@ package edu.espol.proyectohote;
 
 import edu.espol.models.Habitacion;
 import static edu.espol.models.Habitacion.habitaciones;
+import edu.espol.models.Reservas;
+import static edu.espol.models.Reservas.reservas;
 import static edu.espol.proyectohote.RegistroHabitacionController.escrituraHabitaciones;
+import static edu.espol.proyectohote.SistemaReservacionController.escrituraReservas;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -109,7 +112,7 @@ public class SistemaRecepcionController implements Initializable {
                     colocarImagen(room,h.getCategoria());
                     room.setOnMouseClicked((MouseEvent mouseEvent) -> {
                          Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-                         alerta.setTitle("Check-in");
+                         alerta.setTitle("Check-out");
                          alerta.setHeaderText(null);
                          alerta.setContentText("Desea realizar el Check-out de la habitacion: "+h.getnHabitacion());
                          ButtonType si = new ButtonType("Si");
@@ -117,6 +120,15 @@ public class SistemaRecepcionController implements Initializable {
                          alerta.getButtonTypes().setAll(si,no);
                          Optional<ButtonType> result = alerta.showAndWait();
                          if(result.get()==si){
+                             int counter=-1;
+                             for(Reservas r: reservas){
+                                 counter++;
+                                 if(r.getNhabitacion().equals(h.getnHabitacion())){
+                                     reservas.remove(counter);
+                                     escrituraReservas(reservas);
+                                     break;
+                                 }
+                             }
                              h.setEstado("Disponible");
                              llenarHabitaciones();
                              escrituraHabitaciones(habitaciones);

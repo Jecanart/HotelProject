@@ -7,10 +7,17 @@ package edu.espol.proyectohote;
 
 import edu.espol.models.Habitacion;
 import static edu.espol.models.Habitacion.habitaciones;
+import edu.espol.models.Reservas;
+import static edu.espol.models.Reservas.reservas;
 import static edu.espol.proyectohote.App.categorias;
+import static edu.espol.proyectohote.RegistroHabitacionController.escrituraHabitaciones;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -21,9 +28,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -68,6 +77,8 @@ public class SistemaReservacionController implements Initializable {
     private TextField paisOrigen;
     @FXML
     private Button btGuardarReserva;
+    @FXML
+    private Label lblNhab;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -75,7 +86,7 @@ public class SistemaReservacionController implements Initializable {
         ArrayList<String> lista = new ArrayList<>();
         ArrayList<String>listaCategorias = new ArrayList<>();
         listaCategorias.add("Matrimonial");listaCategorias.add("Suite");listaCategorias.add("Doble");listaCategorias.add("Triple");listaCategorias.add("Todas");
-        lista.add("Efectivo");lista.add("Tarje Crédito/Débito");
+        lista.add("Efectivo");lista.add("Credito/Debito");
         cboxCategoria.setItems(FXCollections.observableArrayList(listaCategorias));
         cbFormaPago.setItems(FXCollections.observableArrayList(lista));
         hpane1.setSpacing(20);
@@ -130,7 +141,7 @@ public class SistemaReservacionController implements Initializable {
                         Text estadoHabitacion = new Text(h.getEstado());
                         //Text numHabitacion = new Text(h.getnHabitacion());
                         Text serviciosHabitacion = new Text(h.getServicios());
-                        
+                        lblNhab.setText(h.getnHabitacion());
                         titulo.setWrappingWidth(70);
                         titulo.setTextAlignment(TextAlignment.JUSTIFY);
                         serviciosHabitacion.setWrappingWidth(70);
@@ -157,6 +168,47 @@ public class SistemaReservacionController implements Initializable {
     Stage stage = (Stage) source.getScene().getWindow();
     stage.close();
 }
+    @FXML
+ public void guardarReserva(){
+     if(!nombre.getText().equals("")&&!identificacion.getText().equals("")&&!paisOrigen.getText().equals("")&&cbFormaPago.getValue()!=null&&fechaEntrada.getValue()!=null&&fechaSalida.getValue()!=null&&!lblNhab.getText().equals("")){
+        Reservas r= new Reservas(nombre.getText(),identificacion.getText(), paisOrigen.getText(), cbFormaPago.getValue(), fechaEntrada.getValue(),fechaSalida.getValue(), lblNhab.getText());
+        reservas.add(r);
+        escrituraReservas(r);
+        for(Habitacion h: habitaciones){
+            if(h.getnHabitacion().equals(lblNhab.getText())){
+                h.setEstado("Reservada");
+                escrituraHabitaciones(habitaciones);
+            }
+        }
+     }else{
+         Alert alerta1 = new Alert(Alert.AlertType.ERROR);
+         alerta1.setTitle("Error de registro");
+         alerta1.setHeaderText(null);
+         alerta1.setContentText("Aun quedan campos sin llenar!");
+         alerta1.showAndWait();
+     }
+        
+ }
  
-    
+
+ 
+ 
+ public static void escrituraReservas(Reservas r){                                                   
+        try(BufferedWriter escritor=new BufferedWriter(new FileWriter("archivos/Reservas.csv",true));){
+             escritor.write(r.getNombre()+";"+r.getIdentificacion()+";"+r.getOrigen()+";"+r.getPago()+";"+String.valueOf(r.getIngreso())+";"+String.valueOf(r.getSalida())+";"+r.getNhabitacion()+"\n");
+        }catch(IOException e){
+            System.err.println("Error de escritura: "+e);  
+        }
+    }
+    public static void escrituraReservas(ArrayList<Reservas> list){
+        try(BufferedWriter escritor=new BufferedWriter(new FileWriter("archivos/Reservas.csv",false));){
+            escritor.write("Nombre;Identificacion;Pais de Origen;Fecha de entrada;Fecha de Salida;Numero de habitacion"+"\n");
+            for(Reservas r: reservas){
+             escritor.write(r.getNombre()+";"+r.getIdentificacion()+";"+r.getOrigen()+";"+r.getPago()+";"+String.valueOf(r.getIngreso())+";"+String.valueOf(r.getSalida())+";"+r.getNhabitacion()+"\n");
+             }
+        }catch(IOException e){
+            System.err.println("Error de escritura: "+e);  
+        }
+        
+    }
 }

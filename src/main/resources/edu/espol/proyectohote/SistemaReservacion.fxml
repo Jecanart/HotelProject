@@ -80,10 +80,11 @@
             <HBox fx:id="hpane2" prefHeight="93.0" prefWidth="407.0" style="-fx-background-color: #C1A14E;" />
          </content>
       </ScrollPane>
-      <Button fx:id="btGuardarReserva" layoutX="581.0" layoutY="496.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="174.0" style="-fx-background-color: #C1A14E;" text="GUARDAR RESERVA" textFill="WHITE">
+      <Button fx:id="btGuardarReserva" layoutX="581.0" layoutY="496.0" mnemonicParsing="false" onAction="#guardarReserva" prefHeight="27.0" prefWidth="174.0" style="-fx-background-color: #C1A14E;" text="GUARDAR RESERVA" textFill="WHITE">
          <font>
             <Font name="Corbel Bold" size="13.0" />
          </font>
       </Button>
+      <Label fx:id="lblNhab" layoutX="29.0" layoutY="543.0" prefHeight="25.0" prefWidth="97.0" visible="false" />
    </children>
 </AnchorPane>
