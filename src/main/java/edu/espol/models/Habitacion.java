@@ -43,7 +43,10 @@ public class Habitacion {
     public String toString() {
         return "Habitacion{" + "nHabitacion=" + nHabitacion + ", precio=" + precio + ", servicios=" + servicios + ", categoria=" + categoria + '}';
     }
-
+    public int getintnHabitacion(){
+        int numero=Integer.parseInt(nHabitacion);
+        return numero;
+    }
     public String getnHabitacion() {
         return nHabitacion;
     }

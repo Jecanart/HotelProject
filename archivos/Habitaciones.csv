@@ -1,3 +1,4 @@
-Numero;Categoria;Precio;Servicios
+Numero;Categoria;Precio;Servicios;Estado
 23123;Suite;23;todo incluido;Disponible
 100;Doble;100;Cama doble;Disponible
+
