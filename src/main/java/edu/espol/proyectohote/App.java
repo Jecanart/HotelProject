@@ -2,6 +2,7 @@ package edu.espol.proyectohote;
 
 import edu.espol.models.Habitacion;
 import edu.espol.models.Hotel;
+import edu.espol.models.Reservas;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,6 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * JavaFX App

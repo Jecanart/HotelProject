@@ -80,9 +80,11 @@ public class SistemaReservacionController implements Initializable {
         cbFormaPago.setItems(FXCollections.observableArrayList(lista));
         hpane1.setSpacing(20);
         hpane2.setSpacing(20);
+        RegistroHabitacionController.teclasnum(identificacion);
+        
 
     }
-
+    
     
     @FXML
     private void cambiar(ActionEvent event){
@@ -91,7 +93,7 @@ public class SistemaReservacionController implements Initializable {
         System.out.println("Llame a cambiar: "+categoria);
         System.out.println(cboxCategoria.getValue());
         
-        Habitacion h1 = new Habitacion("17",75,"Desayuno","Doble");
+        /**Habitacion h1 = new Habitacion("17",75,"Desayuno","Doble");
         Habitacion h3 = new Habitacion("18",85,"Desayuno","Triple");
         Habitacion h4 = new Habitacion("19",95,"Comida incluida","Suite");
         Habitacion h5 = new Habitacion("20",150,"Todo esta incluido","Matrimonial");
@@ -99,10 +101,10 @@ public class SistemaReservacionController implements Initializable {
         listaH.add(h1);
         listaH.add(h3);
         listaH.add(h4);
-        listaH.add(h5);
+        listaH.add(h5);*/
         //ArrayList<Habitacion> filtrarHabitaciones = Habitacion.filtrarHabitacion(habitaciones, categoria);
                 //Pelicula.filtrarPeliculas(peliculas, categoria);
-        ArrayList<Habitacion> filtrarHabitaciones = Habitacion.filtrarHabitacion(listaH, categoria);
+        ArrayList<Habitacion> filtrarHabitaciones = Habitacion.filtrarHabitacion(habitaciones, categoria);
         hpane1.getChildren().clear();
         hpane2.getChildren().clear();
         mostrarHabitacion(filtrarHabitaciones);
@@ -125,7 +127,7 @@ public class SistemaReservacionController implements Initializable {
                         //String p = (String) h.getPrecio();
                         Text precio = new Text("$"+Integer.toString(h.getPrecio()));
                         Text titulo = new Text("Habitación tipo:"+h.getCategoria()+" N°"+h.getnHabitacion());
-                        Text estadoHabitacion = new Text("Disponible");
+                        Text estadoHabitacion = new Text(h.getEstado());
                         //Text numHabitacion = new Text(h.getnHabitacion());
                         Text serviciosHabitacion = new Text(h.getServicios());
                         

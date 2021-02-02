@@ -51,6 +51,7 @@ public class SistemaRecepcionController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         llenarHabitaciones();
     }    
     
@@ -66,7 +67,7 @@ public class SistemaRecepcionController implements Initializable {
             lblCategoria.setStyle("-fx-text-fill: white");
             Label lblEstado= new Label(h.getEstado());
             lblEstado.setStyle("-fx-text-fill: white");
-            room.getChildren().addAll(lblNumero,lblCategoria,lblEstado);
+        room.getChildren().addAll(lblNumero,lblCategoria,lblEstado);
             pHabitaciones.getChildren().addAll(room);
             switch(h.getEstado()){
                 case "Disponible":
