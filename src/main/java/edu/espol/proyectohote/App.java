@@ -42,6 +42,7 @@ public class App extends Application {
         Hotel.cargarHoteles();
         Habitacion.cargarHabitaciones();
         Reservas.cargarReservas();
+        Habitacion.verificarFechas();
         launch();
     }
 

@@ -176,8 +176,21 @@ public class SistemaReservacionController implements Initializable {
         escrituraReservas(r);
         for(Habitacion h: habitaciones){
             if(h.getnHabitacion().equals(lblNhab.getText())){
+                if(h.getEstado().equals("Ocupada")){
+                   Alert alerta1 = new Alert(Alert.AlertType.ERROR);
+                    alerta1.setTitle("Error de registro");
+                    alerta1.setHeaderText(null);
+                    alerta1.setContentText("La habitacion no se encuentra disponible");
+                    alerta1.showAndWait(); 
+                    break;
+                }
                 h.setEstado("Reservada");
                 escrituraHabitaciones(habitaciones);
+                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                alerta.setTitle("Informacion");
+                alerta.setHeaderText(null);
+                alerta.setContentText("La habiatacion n° "+h.getnHabitacion()+" ha sido reservada");
+                alerta.showAndWait();
             }
         }
      }else{

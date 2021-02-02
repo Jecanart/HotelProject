@@ -5,9 +5,12 @@
  */
 package edu.espol.models;
 
+import static edu.espol.models.Reservas.reservas;
+import static edu.espol.proyectohote.RegistroHabitacionController.escrituraHabitaciones;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,6 +105,20 @@ public class Habitacion {
         return habitacionesFiltradas;
      }
 
-  
+    public static void verificarFechas(){
+        LocalDate hoy=LocalDate.now();
+        for(Reservas r: reservas){
+            if(r.getIngreso().compareTo(hoy)<=0){
+                String habitacion = r.getNhabitacion();
+                for(Habitacion h: habitaciones){
+                    if(h.getnHabitacion().equals(habitacion)&&h.getEstado().equals("Disponible")){
+                        h.setEstado("Reservada");
+                        escrituraHabitaciones(habitaciones);
+                    }
+                }
+            }
+            
+        }
+    }
      
 }
