@@ -170,13 +170,14 @@ public class SistemaReservacionController implements Initializable {
 }
     @FXML
  public void guardarReserva(){
+     LocalDate hoy=LocalDate.now();
      if(!nombre.getText().equals("")&&!identificacion.getText().equals("")&&!paisOrigen.getText().equals("")&&cbFormaPago.getValue()!=null&&fechaEntrada.getValue()!=null&&fechaSalida.getValue()!=null&&!lblNhab.getText().equals("")){
         Reservas r= new Reservas(nombre.getText(),identificacion.getText(), paisOrigen.getText(), cbFormaPago.getValue(), fechaEntrada.getValue(),fechaSalida.getValue(), lblNhab.getText());
         reservas.add(r);
         escrituraReservas(r);
         for(Habitacion h: habitaciones){
             if(h.getnHabitacion().equals(lblNhab.getText())){
-                if(h.getEstado().equals("Ocupada")){
+                if(h.getEstado().equals("Ocupada")||h.getEstado().equals("Reservada")){
                    Alert alerta1 = new Alert(Alert.AlertType.ERROR);
                     alerta1.setTitle("Error de registro");
                     alerta1.setHeaderText(null);
@@ -184,8 +185,11 @@ public class SistemaReservacionController implements Initializable {
                     alerta1.showAndWait(); 
                     break;
                 }
-                h.setEstado("Reservada");
-                escrituraHabitaciones(habitaciones);
+                
+                if(r.getIngreso().compareTo(hoy)==0){
+                   h.setEstado("Reservada");
+                   escrituraHabitaciones(habitaciones); 
+                }
                 Alert alerta = new Alert(Alert.AlertType.INFORMATION);
                 alerta.setTitle("Informacion");
                 alerta.setHeaderText(null);

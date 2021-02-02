@@ -117,6 +117,15 @@ public class Habitacion {
                     }
                 }
             }
+            if(r.getSalida().compareTo(hoy)>0){
+                String habitacion = r.getNhabitacion();
+                for(Habitacion h: habitaciones){
+                    if(h.getnHabitacion().equals(habitacion)&&h.getEstado().equals("Reservada")){
+                        h.setEstado("Disponible");
+                        escrituraHabitaciones(habitaciones);
+                    }
+                }
+            }
             
         }
     }
