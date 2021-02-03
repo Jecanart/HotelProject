@@ -76,7 +76,7 @@ public class RegistroHabitacionController implements Initializable {
     }
   
     @FXML
-    public void guardarHabitacion(){
+    public void guardarHabitacion(){  //Metodo que guarda las habitaciones al momento se aplastar la botonera
     String numero=txtNumeroH.getText();  
     boolean exist=false;
     int counter=-1;          
