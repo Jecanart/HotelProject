@@ -43,9 +43,9 @@ public class SistemaHotelController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
        
     }    
-   
+    /**metodo que abre el panel de registros con el boton registrar habitacion*/
     @FXML
-    public void startRegistro(ActionEvent event) throws IOException{//metodo que abre el panel de registros con el boton registrar habitacion
+    public void startRegistro(ActionEvent event) throws IOException{
         Scene secondScene = new Scene(loadFXML("RegistroHabitacion"), 677, 430);
         //Stage newWindow = new Stage();
         Stage newWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -53,8 +53,9 @@ public class SistemaHotelController implements Initializable {
         newWindow.setScene(secondScene);
         newWindow.show();
     }
+    /**metodo que abre el panel de recepcion con el boton recepcion*/
     @FXML
-    public void startRecepcion(ActionEvent event) throws IOException{//metodo que abre el panel de recepcion con el boton recepcion
+    public void startRecepcion(ActionEvent event) throws IOException{
         Scene secondScene = new Scene(loadFXML("SistemaRecepcion"), 677, 430);
         //Stage newWindow = new Stage();
         Stage newWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -62,8 +63,9 @@ public class SistemaHotelController implements Initializable {
         newWindow.setScene(secondScene);
         newWindow.show();
     }
+    /**metodo que abre el panel de hoteles con el boton registro hotel*/
     @FXML
-    public void startHotel(ActionEvent event) throws IOException{//metodo que abre el panel de hoteles con el boton registro hotel
+    public void startHotel(ActionEvent event) throws IOException{
         Scene secondScene = new Scene(loadFXML("RegistroHotel"), 670, 430);
         //Stage newWindow = new Stage();
         Stage newWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -71,8 +73,9 @@ public class SistemaHotelController implements Initializable {
         newWindow.setScene(secondScene);
         newWindow.show();
     }
+    /**metodo que abre el panel de reservas con el boton reservas*/
     @FXML
-    public void startReservacion(ActionEvent event) throws IOException{//metodo que abre el panel de reservas con el boton reservas
+    public void startReservacion(ActionEvent event) throws IOException{
         Scene secondScene = new Scene(loadFXML("SistemaReservacion"), 820, 600);
         Stage newWindow = new Stage();
         newWindow.setTitle("Reservación de Habitación");
