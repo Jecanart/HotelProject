@@ -5,15 +5,23 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.espol.proyectohote.SistemaRecepcionController">
+<AnchorPane id="AnchorPane" prefHeight="430.0" prefWidth="677.0" style="-fx-background-color: #06151C;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.espol.proyectohote.SistemaRecepcionController">
    <children>
-      <Label layoutX="33.0" layoutY="14.0" prefHeight="17.0" prefWidth="82.0" text="Recepcion:" />
-      <ScrollPane layoutX="14.0" layoutY="41.0" prefHeight="336.0" prefWidth="567.0">
+      <ScrollPane layoutX="98.0" layoutY="76.0" prefHeight="278.0" prefWidth="482.0" style="-fx-background-color: #C1A14E;">
          <content>
-            <FlowPane fx:id="pHabitaciones" hgap="10.0" prefHeight="333.0" prefWidth="542.0" vgap="10.0" />
+            <FlowPane fx:id="pHabitaciones" hgap="10.0" prefHeight="276.0" prefWidth="480.0" style="-fx-background-color: #C1A14E;" vgap="10.0" />
          </content>
       </ScrollPane>
-      <Button fx:id="btVolver" layoutX="506.0" layoutY="10.0" mnemonicParsing="false" onAction="#startMenu" text="Volver" />
+      <Button fx:id="btVolver" layoutX="455.0" layoutY="369.0" mnemonicParsing="false" onAction="#startMenu" prefHeight="28.0" prefWidth="125.0" style="-fx-background-color: #C1A14E;" text="Volver" textFill="WHITE">
+         <font>
+            <Font name="Corbel Bold" size="15.0" />
+         </font></Button>
+      <Label layoutX="76.0" layoutY="20.0" prefHeight="43.0" prefWidth="551.0" text="RESERVACIÓN DE HABITACIÓN" textFill="#c1a14e">
+         <font>
+            <Font name="Times New Roman" size="35.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

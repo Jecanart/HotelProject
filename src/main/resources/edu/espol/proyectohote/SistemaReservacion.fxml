@@ -19,9 +19,9 @@
          <font>
             <Font name="Times New Roman" size="35.0" />
          </font></Label>
-      <ScrollPane layoutX="29.0" layoutY="73.0" prefHeight="285.0" prefWidth="552.0">
+      <ScrollPane layoutX="29.0" layoutY="117.0" prefHeight="215.0" prefWidth="552.0">
          <content>
-            <HBox fx:id="hpane1" prefHeight="285.0" prefWidth="550.0" style="-fx-background-color: #ffffff;" />
+            <HBox fx:id="hpane1" prefHeight="213.0" prefWidth="550.0" style="-fx-background-color: #ffffff;" />
          </content>
       </ScrollPane>
       <Button fx:id="btMenu" layoutX="378.0" layoutY="496.0" mnemonicParsing="false" onAction="#cerrarVentana" prefHeight="27.0" prefWidth="174.0" style="-fx-background-color: #C1A14E;" text="VOLVER" textFill="WHITE">

@@ -92,39 +92,20 @@ public class SistemaReservacionController implements Initializable {
         hpane1.setSpacing(20);
         hpane2.setSpacing(20);
         RegistroHabitacionController.teclasnum(identificacion);
-        
-
     }
     
-    
     @FXML
-    private void cambiar(ActionEvent event){
+    private void cambiar(ActionEvent event){    //Metodo que cambia las habitaciones de acuerdo a su categoria seleccionada en el comboBox
         ComboBox cb=(ComboBox)event.getSource();
         String categoria = (String) cb.getValue();
-        System.out.println("Llame a cambiar: "+categoria);
-        System.out.println(cboxCategoria.getValue());
-        
-        /**Habitacion h1 = new Habitacion("17",75,"Desayuno","Doble");
-        Habitacion h3 = new Habitacion("18",85,"Desayuno","Triple");
-        Habitacion h4 = new Habitacion("19",95,"Comida incluida","Suite");
-        Habitacion h5 = new Habitacion("20",150,"Todo esta incluido","Matrimonial");
-        ArrayList<Habitacion> listaH = new ArrayList<>();
-        listaH.add(h1);
-        listaH.add(h3);
-        listaH.add(h4);
-        listaH.add(h5);*/
-        //ArrayList<Habitacion> filtrarHabitaciones = Habitacion.filtrarHabitacion(habitaciones, categoria);
-                //Pelicula.filtrarPeliculas(peliculas, categoria);
         ArrayList<Habitacion> filtrarHabitaciones = Habitacion.filtrarHabitacion(habitaciones, categoria);
         hpane1.getChildren().clear();
         hpane2.getChildren().clear();
         mostrarHabitacion(filtrarHabitaciones);
-        
-        
     }
     
     @FXML
-    public void verificarFechaEntrada(ActionEvent event){
+    public void verificarFechaEntrada(ActionEvent event){  //Metodo que llegar a verifciar que la fecha de Ingreso no sea días antes a la fecha actual del computador
         LocalDate fechaActual = LocalDate.now();
         LocalDate inicio = fechaEntrada.getValue();
         if(inicio.isAfter(fechaActual) || inicio.isEqual(fechaActual)){
@@ -174,7 +155,7 @@ public class SistemaReservacionController implements Initializable {
                 System.out.println("Entre al IF");
                 LocalDate inicioReserva = r.getIngreso();
                 LocalDate salidaReserva = r.getSalida();
-                if(inicio.isBefore(inicioReserva) && salida.isBefore(inicioReserva)){ //Fecha No Incluida(inicio.isAfter(salidaReserva) && salida.isAfter(salidaReserva))
+                if((inicio.isBefore(inicioReserva) && salida.isBefore(inicioReserva))|| (inicio.isAfter(salidaReserva) && salida.isAfter(salidaReserva))){ //Fecha No Incluida
                     Alert alerta = new Alert(Alert.AlertType.INFORMATION);
                     alerta.setTitle("Información");
                     alerta.setHeaderText(null);
@@ -185,7 +166,7 @@ public class SistemaReservacionController implements Initializable {
                     Alert alerta1 = new Alert(Alert.AlertType.ERROR);
                     alerta1.setTitle("Error de registro de Fecha");
                     alerta1.setHeaderText(null);
-                    alerta1.setContentText("La fecha seleccionada debe ser después del: "+inicio);
+                    alerta1.setContentText("La habitación estará ocupada desde "+inicioReserva+" hasta el "+salidaReserva);
                     alerta1.showAndWait();
                 }
             }
@@ -202,8 +183,8 @@ public class SistemaReservacionController implements Initializable {
             System.out.println(h.getCategoria());
            Image img = new Image("imagenes/"+h.getCategoria()+".JPG");
            ImageView imgView = new ImageView(img);
-           imgView.setFitHeight(180);
-           imgView.setFitWidth(270);
+           imgView.setFitHeight(210);
+           imgView.setFitWidth(350);
            hpane1.getChildren().add(imgView);
            imgView.setOnMouseClicked(
                 new EventHandler<MouseEvent>() {
