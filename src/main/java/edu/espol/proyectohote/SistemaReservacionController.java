@@ -116,7 +116,7 @@ public class SistemaReservacionController implements Initializable {
             alerta.showAndWait();  
         }
         else{
-            Alert alerta1 = new Alert(Alert.AlertType.ERROR);
+            Alert alerta1 = new Alert(Alert.AlertType.ERROR);  //Enviar mensaje de aletar cuando la fecha es menor a la actual
             alerta1.setTitle("Error de registro de Fecha");
             alerta1.setHeaderText(null);
             alerta1.setContentText("La fecha seleccionada debe ser apartir del: "+fechaActual);
@@ -125,18 +125,18 @@ public class SistemaReservacionController implements Initializable {
     }
     
     @FXML
-    public void verificarFechaSalida(ActionEvent event){
+    public void verificarFechaSalida(ActionEvent event){ //Metodo que llegar a verifciar que la fecha de Salida no sea igual a la fecha de entrada
         LocalDate inicio = fechaEntrada.getValue();
         LocalDate salida = fechaSalida.getValue();
         if(salida.isAfter(inicio)){
-            Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+            Alert alerta = new Alert(Alert.AlertType.INFORMATION); //Fecha ingresada de forma correcta
             alerta.setTitle("Información");
             alerta.setHeaderText(null);
             alerta.setContentText("¡La fecha ingresada correctamente!");
             alerta.showAndWait();  
         }
         else{
-            Alert alerta1 = new Alert(Alert.AlertType.ERROR);
+            Alert alerta1 = new Alert(Alert.AlertType.ERROR); //Me
             alerta1.setTitle("Error de registro de Fecha");
             alerta1.setHeaderText(null);
             alerta1.setContentText("La fecha seleccionada debe ser después del: "+inicio);
@@ -145,70 +145,62 @@ public class SistemaReservacionController implements Initializable {
     }
     
     @FXML
-    public void verificar(ActionEvent event){
-        System.out.println(lblNhab.getText());
-        LocalDate inicio = fechaEntrada.getValue();
-        LocalDate salida = fechaSalida.getValue();
-        for(Reservas r : reservas){
+    public void verificar(ActionEvent event){ //Metodo que se encarga de verificar el rango de fechas seleccionado por el usuario no este reservada con anticipacion la habitacion
+        LocalDate inicio = fechaEntrada.getValue();  //Fecha de entrada por el usuario
+        LocalDate salida = fechaSalida.getValue();   //Fecha de salida por el usuario
+        for(Reservas r : reservas){                 //Recorre lista estatica de las reservas que estan guardados en un archivo
             r.getNhabitacion();
-            if(lblNhab.getText().equals(r.getNhabitacion())){
-                System.out.println("Entre al IF");
-                LocalDate inicioReserva = r.getIngreso();
-                LocalDate salidaReserva = r.getSalida();
-                if((inicio.isBefore(inicioReserva) && salida.isBefore(inicioReserva))|| (inicio.isAfter(salidaReserva) && salida.isAfter(salidaReserva))){ //Fecha No Incluida
+            if(lblNhab.getText().equals(r.getNhabitacion())){ //Se vefica la habitacion sean la misma
+                LocalDate inicioReserva = r.getIngreso();     //Fecha de entrada de la habitacion reservada
+                LocalDate salidaReserva = r.getSalida();      //Fecha de salida de la habitacion reservada
+                if((inicio.isBefore(inicioReserva) && salida.isBefore(inicioReserva))|| (inicio.isAfter(salidaReserva) && salida.isAfter(salidaReserva))){ //Se realiza la conficones para que las fechas ingresadas no se intefieran con las fechas reservadas
                     Alert alerta = new Alert(Alert.AlertType.INFORMATION);
                     alerta.setTitle("Información");
                     alerta.setHeaderText(null);
-                    alerta.setContentText("No hay reservaciones durante las fechas seleccionadas!");
+                    alerta.setContentText("No hay reservaciones durante las fechas seleccionadas!");                        //El rango de fecha no se encuentra reservada la habitación
                     alerta.showAndWait();  
                 }
                 else{
                     Alert alerta1 = new Alert(Alert.AlertType.ERROR);
                     alerta1.setTitle("Error de registro de Fecha");
                     alerta1.setHeaderText(null);
-                    alerta1.setContentText("La habitación estará ocupada desde "+inicioReserva+" hasta el "+salidaReserva);
+                    alerta1.setContentText("La habitación estará ocupada desde "+inicioReserva+" hasta el "+salidaReserva);  //El rango de fecha ingresado interfiere con el reservado
                     alerta1.showAndWait();
                 }
-            }
-            
-            
+            } 
         }
-        System.out.println("Salir del For");
     }
     
 
     
-    public void mostrarHabitacion(ArrayList<Habitacion> listaHabitaciones){
-        for(Habitacion h : listaHabitaciones){
-            System.out.println(h.getCategoria());
-           Image img = new Image("imagenes/"+h.getCategoria()+".JPG");
+    public void mostrarHabitacion(ArrayList<Habitacion> listaHabitaciones){ //Se muestran las habitaciones de acuerdo al ArrayList de Habitaciones recibidas
+        for(Habitacion h : listaHabitaciones){                              //Recorre las habitaciones
+           Image img = new Image("imagenes/"+h.getCategoria()+".JPG");      //Se consigue la imagen de la habitacion
            ImageView imgView = new ImageView(img);
-           imgView.setFitHeight(210);
-           imgView.setFitWidth(350);
+           imgView.setFitHeight(210);                                       //Dimension vertical de la imagen 
+           imgView.setFitWidth(350);                                        //Dimension horizontal de la imag
            hpane1.getChildren().add(imgView);
-           imgView.setOnMouseClicked(
-                new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent arg0) {
-                        //String p = (String) h.getPrecio();
-                        Text precio = new Text("$"+Integer.toString(h.getPrecio()));
-                        Text titulo = new Text("Habitación tipo:"+h.getCategoria()+" N°"+h.getnHabitacion());
-                        Text estadoHabitacion = new Text(h.getEstado());
-                        //Text numHabitacion = new Text(h.getnHabitacion());
-                        Text serviciosHabitacion = new Text(h.getServicios());
-                        lblNhab.setText(h.getnHabitacion());
+           imgView.setOnMouseClicked(                                       //Se crea una clase implicita
+                new EventHandler<MouseEvent>() {                            //A traves de un MouseEvent, quiere decir que al seleccionar una imagen se realizar aquella accion 
+                    @Override                   
+                    public void handle(MouseEvent arg0) {                   //Con este metodo se extraera toda la informacion de la imagen que se selecciono
+                        Text precio = new Text("$"+Integer.toString(h.getPrecio()));  //Precio de habitacion
+                        Text titulo = new Text("Habitación tipo:"+h.getCategoria()+" N°"+h.getnHabitacion()); //Categoria y numero de la habitacion
+                        Text estadoHabitacion = new Text(h.getEstado());        //Estado de la habitación
+                        Text serviciosHabitacion = new Text(h.getServicios());  //Servicio que incluye
+                        lblNhab.setText(h.getnHabitacion());                    //Se guarda el numero de la Habitación para utilizarlo en el metodo verificar
                         titulo.setWrappingWidth(70);
-                        titulo.setTextAlignment(TextAlignment.JUSTIFY);
-                        serviciosHabitacion.setWrappingWidth(70);
-                        serviciosHabitacion.setTextAlignment(TextAlignment.JUSTIFY);
+                        titulo.setTextAlignment(TextAlignment.JUSTIFY);         //Justifica texto
+                        serviciosHabitacion.setWrappingWidth(70);               //Dimensión del texto es de 70
+                        serviciosHabitacion.setTextAlignment(TextAlignment.JUSTIFY);//Justifica texto
                         estadoHabitacion.setWrappingWidth(70);
-                        estadoHabitacion.setTextAlignment(TextAlignment.CENTER);
+                        estadoHabitacion.setTextAlignment(TextAlignment.CENTER);  //Texto Centrado
                         precio.setWrappingWidth(70);
-                        precio.setTextAlignment(TextAlignment.CENTER);
+                        precio.setTextAlignment(TextAlignment.CENTER);            //Texto Centrado
                         
-                        hpane2.getChildren().clear();
-                        hpane2.getChildren().add(titulo);
-                        hpane2.getChildren().add(serviciosHabitacion);
+                        hpane2.getChildren().clear();                           //Se limpia el hpane2 para mostrar la informacion de la imagene seleccionada
+                        hpane2.getChildren().add(titulo);                       //Titulo: Num y Categoria de la habitacion agregados al al hpane2
+                        hpane2.getChildren().add(serviciosHabitacion);  
                         hpane2.getChildren().add(precio);
                         hpane2.getChildren().add(estadoHabitacion);
 
@@ -218,19 +210,19 @@ public class SistemaReservacionController implements Initializable {
         }  
     }
     @FXML
-    public void cerrarVentana(ActionEvent event) {
+    public void cerrarVentana(ActionEvent event) { //Metodo que cerrara la ventana 
     Node source = (Node) event.getSource();
     Stage stage = (Stage) source.getScene().getWindow();
     stage.close();
 }
     @FXML
- public void guardarReserva(){
+ public void guardarReserva(){      //Se va a guardar las reservas al momento de aplastar la botonera de guardar
      LocalDate hoy=LocalDate.now();
      if(!nombre.getText().equals("")&&!identificacion.getText().equals("")&&!paisOrigen.getText().equals("")&&cbFormaPago.getValue()!=null&&fechaEntrada.getValue()!=null&&fechaSalida.getValue()!=null&&!lblNhab.getText().equals("")){
         Reservas r= new Reservas(nombre.getText(),identificacion.getText(), paisOrigen.getText(), cbFormaPago.getValue(), fechaEntrada.getValue(),fechaSalida.getValue(), lblNhab.getText());
-        reservas.add(r);
-        escrituraReservas(r);
-        for(Habitacion h: habitaciones){
+        reservas.add(r);            //Se va verificar que la reserva se haya llenado todos los campos
+        escrituraReservas(r);       //Se escribe en el archivo de reservas
+        for(Habitacion h: habitaciones){    //Se necesita saber cual es la habitacion 
             if(h.getnHabitacion().equals(lblNhab.getText())){
                 if(h.getEstado().equals("Ocupada")||h.getEstado().equals("Reservada")){
                    Alert alerta1 = new Alert(Alert.AlertType.ERROR);
@@ -241,14 +233,14 @@ public class SistemaReservacionController implements Initializable {
                     break;
                 }
                 
-                if(r.getIngreso().compareTo(hoy)==0){
+                if(r.getIngreso().compareTo(hoy)==0){  //Condicion para saber si esta reservada la habitaciones
                    h.setEstado("Reservada");
                    escrituraHabitaciones(habitaciones); 
                 }
                 Alert alerta = new Alert(Alert.AlertType.INFORMATION);
                 alerta.setTitle("Informacion");
-                alerta.setHeaderText(null);
-                alerta.setContentText("La habiatacion n° "+h.getnHabitacion()+" ha sido reservada");
+                alerta.setHeaderText(null);             
+                alerta.setContentText("La habiatacion n° "+h.getnHabitacion()+" ha sido reservada");//Verifica que la habitación fue ingresada  fue reservada con exito
                 alerta.showAndWait();
             }
         }

@@ -58,25 +58,29 @@ public class SistemaRecepcionController implements Initializable {
         llenarHabitaciones();
     }    
     
-    
+    //Este metodo coloca un VBox con los datos de una habitacion dentro de el FlowPane "pHabitaciones", se una un switch para definir que pasa si se hace click sobre la habitacion
+    //segun el estado y que color se coloca
     public void llenarHabitaciones(){    
         pHabitaciones.getChildren().clear();
-        Collections.sort(habitaciones, (Habitacion h1, Habitacion h2) -> new Integer(h2.getintnHabitacion()).compareTo(new Integer(h1.getintnHabitacion())));
-        for(Habitacion h: habitaciones){
+        Collections.sort(habitaciones, (Habitacion h1, Habitacion h2) -> new Integer(h2.getintnHabitacion()).compareTo(new Integer(h1.getintnHabitacion())));//las habitaciones son ordenadas por su numero con "Collection.sort"
+        for(Habitacion h: habitaciones){//se concatena la lista habitaciones para crear cada VBox
             VBox room=new VBox();
             Label lblNumero= new Label(h.getnHabitacion());
-            lblNumero.setStyle("-fx-text-fill: white");
+            lblNumero.setStyle("-fx-text-fill: white");//se le da color blanco al texto
             Label lblCategoria= new Label(h.getCategoria());
-            lblCategoria.setStyle("-fx-text-fill: white");
+            lblCategoria.setStyle("-fx-text-fill: white");//se le da color blanco al texto
             Label lblEstado= new Label(h.getEstado());
-            lblEstado.setStyle("-fx-text-fill: white");
-        room.getChildren().addAll(lblNumero,lblCategoria,lblEstado);
-            pHabitaciones.getChildren().addAll(room);
+            lblEstado.setStyle("-fx-text-fill: white");//se le da color blanco al texto
+        room.getChildren().addAll(lblNumero,lblCategoria,lblEstado);//se crea el VBox con sus elementos
+            pHabitaciones.getChildren().addAll(room);//se añaden las habitaciones al FlowPane
             switch(h.getEstado()){
                 case "Disponible":
+                    
                     colocarImagen(room,h.getCategoria());
-                    room.setStyle("-fx-background-color: green;"+"-fx-border-color: black");
+                    room.setStyle("-fx-background-color: green;"+"-fx-border-color: black");//se da Color verde al VBox
+                    //se asigna un evento de click al VBBox
                     room.setOnMouseClicked((MouseEvent mouseEvent) -> {
+                        //se abre la pantalla de reservacion dentro del try
                 try {
                     Scene secondScene = new Scene(loadFXML("SistemaReservacion"), 820, 600);
                     Stage newWindow = new Stage();
@@ -90,19 +94,19 @@ public class SistemaRecepcionController implements Initializable {
                     break;
                 case "Reservada":
                     colocarImagen(room,h.getCategoria());
-                    room.setStyle("-fx-background-color: orange;"+"-fx-border-color: black");
-                    room.setOnMouseClicked((MouseEvent mouseEvent) -> {
+                    room.setStyle("-fx-background-color: orange;"+"-fx-border-color: black");//se da Color naranja al VBox
+                    room.setOnMouseClicked((MouseEvent mouseEvent) -> {//se asigna un evento de click al VBBox
                          Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-                         alerta.setTitle("Check-in");
+                         alerta.setTitle("Check-in");//se envia un aviso de check-in
                          alerta.setHeaderText(null);
                          alerta.setContentText("Desea realizar el Check-in de la habitacion: "+h.getnHabitacion());
                          ButtonType si = new ButtonType("Si");
                          ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
                          alerta.getButtonTypes().setAll(si,no);
                          Optional<ButtonType> result = alerta.showAndWait();
-                         if(result.get()==si){
-                             h.setEstado("Ocupada");
-                             llenarHabitaciones();
+                         if(result.get()==si){//si se coloca si al aviso se cambia el estado de la habitacion a "Ocupada"
+                             h.setEstado("Ocupada");//se actualiza el estado de la habitacion
+                             llenarHabitaciones();//se actualizan las habitaciones
                              escrituraHabitaciones(habitaciones);
                          }
             });
@@ -110,8 +114,8 @@ public class SistemaRecepcionController implements Initializable {
                     break;
                 case "Ocupada":
                     colocarImagen(room,h.getCategoria());
-                    room.setOnMouseClicked((MouseEvent mouseEvent) -> {
-                         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                    room.setOnMouseClicked((MouseEvent mouseEvent) -> {//se asigna el evento click al VBox
+                         Alert alerta = new Alert(Alert.AlertType.INFORMATION);//se envia aviso para consultar al usuario sobre el check-out
                          alerta.setTitle("Check-out");
                          alerta.setHeaderText(null);
                          alerta.setContentText("Desea realizar el Check-out de la habitacion: "+h.getnHabitacion());
@@ -119,22 +123,22 @@ public class SistemaRecepcionController implements Initializable {
                          ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
                          alerta.getButtonTypes().setAll(si,no);
                          Optional<ButtonType> result = alerta.showAndWait();
-                         if(result.get()==si){
+                         if(result.get()==si){//si se confirma el check-out se recorre la lista reservas para eliminarla al haber completado la estadia
                              int counter=-1;
                              for(Reservas r: reservas){
                                  counter++;
-                                 if(r.getNhabitacion().equals(h.getnHabitacion())){
+                                 if(r.getNhabitacion().equals(h.getnHabitacion())){//if para encontrar el numero de habitacion correspondiente
                                      reservas.remove(counter);
-                                     escrituraReservas(reservas);
+                                     escrituraReservas(reservas);//se actualizan las reservas
                                      break;
                                  }
                              }
-                             h.setEstado("Disponible");
-                             llenarHabitaciones();
+                             h.setEstado("Disponible");//se actualiza el estado de la habitacion
+                             llenarHabitaciones();//se actualizan las habitaciones 
                              escrituraHabitaciones(habitaciones);
                          }
             });
-                    room.setStyle("-fx-background-color: darkred;"+"-fx-border-color: black");
+                    room.setStyle("-fx-background-color: darkred;"+"-fx-border-color: black");//se da Color rojo al VBox
                     
                     break;
                 default:
@@ -150,7 +154,7 @@ public class SistemaRecepcionController implements Initializable {
         
     }
     
-    //Coloca la imagen en el Vbox
+    //Metodo que coloca imagenes en un VBox
     public void colocarImagen(VBox vbox,String s){
         Image img = new Image("imagenes/"+s+".JPG");
                     ImageView imgView = new ImageView(img);
@@ -158,6 +162,7 @@ public class SistemaRecepcionController implements Initializable {
                     imgView.setFitWidth(135);
                     vbox.getChildren().add(imgView);
     }
+    //Metodo asignado al boton Volver que devuelve al menu principal cerrando la pantalla en el proceso
     @FXML
         public void startMenu(ActionEvent event) throws IOException {
         Scene secondScene = new Scene(loadFXML("SistemaHotel"), 670, 430);
@@ -167,6 +172,7 @@ public class SistemaRecepcionController implements Initializable {
         newWindow.setScene(secondScene);
         newWindow.show();
     }
+        //Metodo necesario para cargar la pantalla del menu
         private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();

@@ -45,7 +45,7 @@ public class Hotel {
     public String getTelefono() {
         return telefono;
     }
-    public static void cargarHoteles(){
+    public static void cargarHoteles(){//metodo para cargar los hoteles creados
         try{
             List<String> lineas= Files.readAllLines(Paths.get("archivos/Hoteles.csv"));
             lineas.remove(0);

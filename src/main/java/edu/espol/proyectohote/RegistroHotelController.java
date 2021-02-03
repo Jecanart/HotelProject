@@ -61,13 +61,13 @@ public class RegistroHotelController implements Initializable {
     }    
     
     @FXML
-    public void crearConsultar(){
+    public void crearConsultar(){//metodo que verifica si el hotel existe buscandolo en la lista, se usa con el boton crear/consultar
         String nombre=txthNombre.getText();     
         boolean existe= false;
         for(Hotel hh:listaHotel){
             if(!nombre.equals(hh.getNombre())){
                 
-            }else{
+            }else{//if que se ejecuta si el hotel existe
                 txthCiudad.setText(hh.getCiudad());
                 txthTelefono.setText(hh.getTelefono());
                 txthDireccion.setText(hh.getDireccion());         
@@ -75,8 +75,8 @@ public class RegistroHotelController implements Initializable {
                 break;
             }
         }
-        if(existe==false){
-            if(listaHotel.size()>0){
+        if(existe==false){//if que se ejecuta si el hotel no existe
+            if(listaHotel.size()>0){//if que permite poner un limite maximo a los hoteles creados, si el limite es alcanzado no se permitira crear mas hoteles
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText(null);
@@ -93,12 +93,12 @@ public class RegistroHotelController implements Initializable {
     }
     
     @FXML
-    public void guardarHotel(){
-        if(!txthNombre.getText().equals("")&&!txthCiudad.getText().equals("")&&!txthDireccion.getText().equals("")&&!txthTelefono.getText().equals("")){
+    public void guardarHotel(){//metodo que guarda el hotel al archivo usado con el boton guardar hotel
+        if(!txthNombre.getText().equals("")&&!txthCiudad.getText().equals("")&&!txthDireccion.getText().equals("")&&!txthTelefono.getText().equals("")){//if que verifica que no queden campos vacios
             Hotel ho=new Hotel(txthNombre.getText(),txthCiudad.getText(),txthDireccion.getText(),txthTelefono.getText());
-            listaHotel.add(ho);
+            listaHotel.add(ho);//actualizacion del archivo de hoteles
             escrituraHotel(ho);
-        }else{
+        }else{//si quedan campos vacios se informa al usuario con un aviso
             Alert alerta1 = new Alert(AlertType.ERROR);
             alerta1.setTitle("Error de registro");
             alerta1.setHeaderText(null);
@@ -111,7 +111,7 @@ public class RegistroHotelController implements Initializable {
         btGuardar.setDisable(true);  
         
     }
-    public static void escrituraHotel(Hotel h){                                                   
+    public static void escrituraHotel(Hotel h){     //meotod que escribe hoteles en el archivo                                              
         try(BufferedWriter escritor=new BufferedWriter(new FileWriter("archivos/Hoteles.csv",true));){
              escritor.write(h.getNombre()+";"+h.getCiudad()+";"+h.getDireccion()+";"+h.getTelefono()+"\n");
         }catch(IOException e){
@@ -120,7 +120,7 @@ public class RegistroHotelController implements Initializable {
     }
     
     @FXML
-    public void startMenu(ActionEvent event) throws IOException {
+    public void startMenu(ActionEvent event) throws IOException {//metodo que permite volver al menu principal 
         Scene secondScene = new Scene(loadFXML("SistemaHotel"), 670, 430);
         //Stage newWindow = new Stage();
         Stage newWindow = (Stage)((Node)event.getSource()).getScene().getWindow();

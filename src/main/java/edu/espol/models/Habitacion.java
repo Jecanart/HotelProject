@@ -75,7 +75,7 @@ public class Habitacion {
     }
     
     
-        public static void cargarHabitaciones(){
+        public static void cargarHabitaciones(){//metodo para cargar las habitaciones del archivo
         try{
             List<String> lineas= Files.readAllLines(Paths.get("archivos/Habitaciones.csv"));
             lineas.remove(0);
@@ -93,7 +93,7 @@ public class Habitacion {
     }
     }
         
-    public static ArrayList <Habitacion> filtrarHabitacion(ArrayList<Habitacion> habitacionesF,String categoria)
+    public static ArrayList <Habitacion> filtrarHabitacion(ArrayList<Habitacion> habitacionesF,String categoria) //metodo que filtra habitaciones segun su categoria
      {
         ArrayList <Habitacion> habitacionesFiltradas = new ArrayList<>();
         for(Habitacion h: habitacionesF){
@@ -105,10 +105,10 @@ public class Habitacion {
         return habitacionesFiltradas;
      }
 
-    public static void verificarFechas(){
+    public static void verificarFechas(){//metodo que verifica las fechas de reservay actualiza el estado de las habitaciones correspondientes
         LocalDate hoy=LocalDate.now();
-        for(Reservas r: reservas){
-            if(r.getIngreso().compareTo(hoy)<=0){
+        for(Reservas r: reservas){//se recorren las reservas
+            if(r.getIngreso().compareTo(hoy)<=0){//if que verifica la fecha de ingreeso
                 String habitacion = r.getNhabitacion();
                 for(Habitacion h: habitaciones){
                     if(h.getnHabitacion().equals(habitacion)&&h.getEstado().equals("Disponible")){
@@ -117,7 +117,7 @@ public class Habitacion {
                     }
                 }
             }
-            if(r.getSalida().compareTo(hoy)>0){
+            if(r.getSalida().compareTo(hoy)>0){//if que verifica la fecha de salida de las habitaciones
                 String habitacion = r.getNhabitacion();
                 for(Habitacion h: habitaciones){
                     if(h.getnHabitacion().equals(habitacion)&&h.getEstado().equals("Reservada")){

@@ -65,7 +65,7 @@ public class Reservas{
     public String getNhabitacion() {
         return nhabitacion;
     }
-        public static void cargarReservas(){
+        public static void cargarReservas(){//metodo que carga las reservas del archivo
         try{
             List<String> lineas= Files.readAllLines(Paths.get("archivos/Reservas.csv"));
             lineas.remove(0);
